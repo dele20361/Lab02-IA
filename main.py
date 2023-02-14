@@ -2,6 +2,9 @@
 import pandas as pd
 import Lab02_IA as rb
 
+#En caso de no funcionar libreria publicada 
+#import lib as rb
+
 # Relaciones
 edges = [("Dificultad","Calificacion"),
          ("Inteligencia","Calificacion"), 
