@@ -13,15 +13,24 @@ class redBayesiana:
         """
         self.model = BayesianNetwork(edges)
 
-    def cdp(self, variable, variable_card, values):
+    def cdp(self, variable, variable_card, values, evidence=None, evidence_card=None):
         """
             Función para agregar las distribuciones de probabilidad condicional de las variables.
             Parámetros:
                 - variable: La variable cuyo CPD está definido. (int/string)
                 - variable_card: Números de estados o cardinalidad. (int)
                 - values: Probabilidad asignada.
+                - evidence: Variables evidencia (list)
+                - evidence_card: Número de variables de evidencia o cardinalidad (int)
+
         """
-        cpd = TabularCPD(variable=variable, variable_card=variable_card, values=values)
+        cpd = TabularCPD(
+                            variable=variable,
+                            variable_card=variable_card,
+                            values=values,
+                            evidence=evidence,
+                            evidence_card=evidence_card
+                        )
         return self.model.add_cpds(cpd)
 
     def __str__(self):
@@ -36,6 +45,8 @@ class redBayesiana:
                 output += f"\n{cpd}\n"
         return output
 
-    def completamenteDescrita(self):
-        ve = VariableElimination(self.model)
-        return ve.check_model()
+    def correcta(self):
+        """
+            Función para verificar que los nodos y los CDP estén definidos correctamente.
+        """
+        return self.model.check_model()
