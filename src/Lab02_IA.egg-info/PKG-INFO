@@ -6,9 +6,7 @@ Home-page: https://github.com/dele20361/Lab02-IA
 Author: Gabriela Contreras
 License: UNKNOWN
 Platform: UNKNOWN
-Requires: BayesianNetwork
-Requires: TabularCPD
-Requires: VariableElimination
+Requires: pgmpy
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 
