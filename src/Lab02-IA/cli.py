@@ -123,8 +123,7 @@ class redBayesiana:
 
 
 def main (edges):
-    network = redBayesiana(edges)
-    return network
+    redBayesiana(edges)
 
 if __name__ == "__main__":
     main()
