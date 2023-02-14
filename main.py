@@ -1,6 +1,6 @@
 
 import pandas as pd
-import redBayesiana as rb
+import Lab02_IA as rb
 
 # Relaciones
 edges = [("Dificultad","Calificacion"),
