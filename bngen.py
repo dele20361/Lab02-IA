@@ -1,5 +1,6 @@
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
 
 class redBayesiana:
 
@@ -34,3 +35,7 @@ class redBayesiana:
                 output += f"\nCPD of {node}:"
                 output += f"\n{cpd}\n"
         return output
+
+    def completamenteDescrita(self):
+        ve = VariableElimination(self.model)
+        return ve.check_model()
