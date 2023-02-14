@@ -6,7 +6,7 @@ setup(
     python_requires=">=3.6",
     long_description = open("README.md").read(),
     long_description_content_type ="text/markdown",
-    requires=["BayesianNetwork","TabularCPD","VariableElimination"],
+    requires=["pgmpy"],
     
     packages= find_packages(where="src"),
     package_dir={"":"src/","Lab02-IA":"src/Lab02-IA"},
