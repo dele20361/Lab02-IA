@@ -1,8 +1,9 @@
+from sys import argv
 import numpy as np
-
-
+import pyAgrum as gum
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
 
 class redBayesiana:
 
@@ -79,3 +80,16 @@ class redBayesiana:
                     "No. Variables de evidencia": list(cpd.cardinality)
                 }
         return cpds
+
+    def inferencia(self, variable, evidence):
+        """
+            Función para calcular una inferencia
+            Parámetros:
+                - variable: Variable sobre la que se hará la inferencia (list)
+                - evidence: Variables observadas (dict)
+        """
+        inf = VariableElimination(self.model)
+        res = inf.query(variable, evidence=evidence)
+        return res
+
+

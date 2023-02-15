@@ -1,5 +1,6 @@
 import json
 import pandas as pd
+import pyAgrum as gum
 from bngen import redBayesiana as rb
 
 # Relaciones
@@ -31,8 +32,31 @@ network.cdp('Calificacion', 3,
                 ['Inteligencia', 'Dificultad'],
                 [2, 2])
 
-print("La red Bayesiana está definida correctamente?: ", network.correcta())
-print("La red Bayesiana está completamente descrita?: ", network.completamenteDescrita())
-print("Representación compacta de la red bayesiana: ", network.compact())
-print("Representación de la red bayesiana como diccionario: \n", pd.DataFrame(network.diccionario()))
-
+opc = 0
+while opc != "6":
+    print("\n                L A B O R A T O R I O  2")
+    print("""
+        Opciones:
+        1. Verificación de Red Bayesiana.
+        2. Verificación de red bayesiana completamente descrita.
+        3. Representación compacta de Red Bayesiana.
+        4. Diccionario de Red Bayesiana.
+        5. Inferencia.
+        6. Salir
+    """)
+    opc = input(" >> Ingrese el número de opción: ")
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    match opc:
+        case "1":
+            print("- La red Bayesiana está definida correctamente?: ", network.correcta())
+        case "2":
+            print("- La red Bayesiana está completamente descrita?: ", network.completamenteDescrita())
+        case "3":
+            print("- Representación compacta de la red bayesiana: ", network.compact())
+        case "4":
+            print("- Representación de la red bayesiana como diccionario: \n", pd.DataFrame(network.diccionario()))
+        case "5":
+            print("- P(Calificacion|Inteligencia=0, Dificultad=1): \n", network.inferencia(["Calificacion"], {"Dificultad": 1, "Inteligencia": 0}))
+        case "6":
+            print("Saliendo...")
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
