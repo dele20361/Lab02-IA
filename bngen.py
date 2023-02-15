@@ -9,7 +9,8 @@ class redBayesiana:
 
     def __init__(self, edges):
         """
-            Parámetros:
+            Parámetros
+            ----------
                 - Edges: Relaciones de dependencia. (Lista de tuplas).
 
             Los nodos se definen a partir de las relaciones de dependencia.
@@ -19,13 +20,17 @@ class redBayesiana:
     def cdp(self, variable, variable_card, values, evidence=None, evidence_card=None):
         """
             Función para agregar las distribuciones de probabilidad condicional de las variables.
-            Parámetros:
+            Parámetros
+            ----------
                 - variable: La variable cuyo CPD está definido. (int/string)
                 - variable_card: Números de estados o cardinalidad. (int)
                 - values: Probabilidad asignada.
                 - evidence: Variables evidencia (list)
                 - evidence_card: Número de variables de evidencia o cardinalidad (int)
 
+            Returns
+            -------
+            CDF agregado.
         """
         cpd = TabularCPD(
                             variable=variable,
@@ -43,6 +48,14 @@ class redBayesiana:
         return self.model.check_model()
 
     def completamenteDescrita(self):
+        """
+            Función para conocer si la Red Bayesiana está o no completamente descrita.
+
+            Returns
+            -------
+            Booleano para indicar si está completamente descrita o no.
+        """
+
         cpds = self.model.get_cpds()
         if not cpds:
             # Un nodo no tiene CDP asociado
@@ -58,6 +71,10 @@ class redBayesiana:
     def compact(self):
         """
             Función para mostrar las distribuciones de probabilidad condicional de una forma más intuitiva y compacta.
+
+            Returns
+            -------
+            String de la Red Bayesiana compactada.
         """
         output = f"Nodes: {', '.join(self.model.nodes())}\n"
         for node in self.model.nodes():
@@ -69,6 +86,13 @@ class redBayesiana:
     
     
     def diccionario(self):
+        """
+            Función para obtener la Red Bayesiana como un diccionario.
+
+            Returns
+            --------
+            Diccionario con información de la Red Bayesiana.
+        """
         cpds = {}
         variables = list(self.model.nodes())
         for node in variables:
@@ -83,10 +107,16 @@ class redBayesiana:
 
     def inferencia(self, variable, evidence):
         """
-            Función para calcular una inferencia
-            Parámetros:
+            Función para calcular una inferencia.
+
+            Parámetros
+            -----------
                 - variable: Variable sobre la que se hará la inferencia (list)
                 - evidence: Variables observadas (dict)
+
+            Returns
+            --------
+            Inferencia.
         """
         inf = VariableElimination(self.model)
         res = inf.query(variable, evidence=evidence)
