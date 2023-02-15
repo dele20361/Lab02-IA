@@ -122,8 +122,8 @@ class redBayesiana:
         return res
 
 
-def main (edges):
-    redBayesiana(edges)
+def main ():
+    redBayesiana()
 
 if __name__ == "__main__":
     main()
