@@ -1,6 +1,5 @@
 from sys import argv
 import numpy as np
-import pyAgrum as gum
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
