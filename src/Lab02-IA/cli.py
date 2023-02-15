@@ -122,3 +122,9 @@ class redBayesiana:
         return res
 
 
+def main (edges):
+    network = redBayesiana(edges)
+    return network
+
+if __name__ == "__main__":
+    main()

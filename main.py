@@ -1,6 +1,5 @@
-import json
+
 import pandas as pd
-import pyAgrum as gum
 from bngen import redBayesiana as rb
 
 # Relaciones
