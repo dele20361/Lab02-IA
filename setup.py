@@ -6,7 +6,11 @@ setup(
     python_requires=">=3.6",
     long_description = open("README.md").read(),
     long_description_content_type ="text/markdown",
-    entry_points={"console_scripts":["Lab02-IA=Lab02-IA.cli:main"]},
+    entry_points={
+    'console_scripts': [
+        'redBayesiana=Lab02-IA.cli:main',
+    ],
+    },
     requires=["BayesianNetwork","TabularCPD","VariableElimination"],
     
     packages= find_packages(where="src"),

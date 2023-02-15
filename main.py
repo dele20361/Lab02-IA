@@ -1,6 +1,6 @@
 
 import pandas as pd
-from bngen import redBayesiana as rb
+import redBayesiana as rb
 
 # Relaciones
 edges = [("Dificultad","Calificacion"),
