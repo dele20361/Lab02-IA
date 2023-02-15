@@ -1,6 +1,8 @@
+import numpy as np
+
+
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
-from pgmpy.inference import VariableElimination
 
 class redBayesiana:
 
@@ -33,9 +35,28 @@ class redBayesiana:
                         )
         return self.model.add_cpds(cpd)
 
-    def __str__(self):
+    def correcta(self):
         """
-            Función para mostrar las distribuciones de probabilidad condicional de una forma más intuitiva.
+            Función para verificar que los nodos y los CDP estén definidos correctamente.
+        """
+        return self.model.check_model()
+
+    def completamenteDescrita(self):
+        cpds = self.model.get_cpds()
+        if not cpds:
+            # Un nodo no tiene CDP asociado
+            return False
+        else:
+            for cpd in cpds:
+                if np.isnan(cpd.values).any():
+                    # El nodo cuenta con un CDP pero no describe todas las probabilidades
+                    return False
+            else:
+                return True
+
+    def compact(self):
+        """
+            Función para mostrar las distribuciones de probabilidad condicional de una forma más intuitiva y compacta.
         """
         output = f"Nodes: {', '.join(self.model.nodes())}\n"
         for node in self.model.nodes():
@@ -44,9 +65,17 @@ class redBayesiana:
                 output += f"\nCPD of {node}:"
                 output += f"\n{cpd}\n"
         return output
-
-    def correcta(self):
-        """
-            Función para verificar que los nodos y los CDP estén definidos correctamente.
-        """
-        return self.model.check_model()
+    
+    
+    def diccionario(self):
+        cpds = {}
+        variables = list(self.model.nodes())
+        for node in variables:
+            cpd = self.model.get_cpds(node)
+            if cpd:
+                cpds[node] = {
+                    "Probabilidades": cpd.values,
+                    "Variables de evidencia": list(cpd.variables),
+                    "No. Variables de evidencia": list(cpd.cardinality)
+                }
+        return cpds

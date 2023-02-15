@@ -1,3 +1,5 @@
+import json
+import pandas as pd
 from bngen import redBayesiana as rb
 
 # Relaciones
@@ -29,4 +31,8 @@ network.cdp('Calificacion', 3,
                 ['Inteligencia', 'Dificultad'],
                 [2, 2])
 
-print(network.correcta())
+print("La red Bayesiana está definida correctamente?: ", network.correcta())
+print("La red Bayesiana está completamente descrita?: ", network.completamenteDescrita())
+print("Representación compacta de la red bayesiana: ", network.compact())
+print("Representación de la red bayesiana como diccionario: \n", pd.DataFrame(network.diccionario()))
+
